@@ -1,0 +1,10 @@
+---
+name: FreeSurfer
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This app will launch the [FreeSurfer] GUI.  You will be able
+  to interact with the FreeSurfer GUI through a VNC session.
+
+  [FreeSurfer]: https://surfer.nmr.mgh.harvard.edu/
