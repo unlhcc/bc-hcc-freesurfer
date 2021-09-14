@@ -1,7 +1,6 @@
 #!/bin/bash
-<%
-%>
 
+#set -x
 # init lmod within container
 [[ -f /etc/profile.d/modules.sh ]] && source /etc/profile.d/modules.sh
 
@@ -12,7 +11,8 @@ module purge
 cd "${HOME}"
 
 # Load the required environment
-module load <%= context.freesurfer_version %>
+export FREESURFER_HOME="/util/opt/<%= context.freesurfer_version %>"
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 #
 # Launch Xfce Window Manager and Panel
@@ -26,7 +26,6 @@ module load <%= context.freesurfer_version %>
   export XDG_RUNTIME_DIR="$(mktemp -d)"
   export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
   export `dbus-launch`
-  module restore
   set -x
   xfwm4 --compositor=off --daemon --sm-client-disable &
   xsetroot -solid "#C7C8CA"
@@ -37,18 +36,17 @@ module load <%= context.freesurfer_version %>
 
 
 # The GUI takes a while to start
-# # Loop until it's there and then try to maximize the window (thanks John!)
-(
-while true ; do
-  wmctrl -l | grep -i 'freeview'
-  if [ $? -eq 0 ]; then break; fi
-    sleep 1
-done
-wmctrl -r FreeView -b add,maximized_vert,maximized_horz
-) &
+# Loop until it's there and then try to maximize the window (thanks John!)
+#(
+#while true ; do
+#  wmctrl -l | grep -i 'freeview'
+#  if [ $? -eq 0 ]; then break; fi
+#    sleep 1
+#done
+#wmctrl -r FreeView -b add,maximized_vert,maximized_horz
+#) &
 
 # Launch freeview
 module list
 set -x
 freeview
-xfce4-session
