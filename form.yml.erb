@@ -12,18 +12,18 @@ attributes:
   bc_num_cores:
     widget: "number_field"
     label: "Number of cores"
-    help: "Number of cores requested on a node (min 1, max 8)"
+    help: "Number of cores requested on a node (min 1, max 16)"
     min: 1
-    max: 8
+    max: 16
     step: 1
     value: "1"
     id: "num_cores"
   bc_num_hours:
     widget: "number_field"
     label: "Running time in hours"
-    help: "Maximum runtime in hours (min 1, max 8)"
+    help: "Maximum runtime in hours (min 1, max 24)"
     min: 1
-    max: 8
+    max: 24
     step: 1
     value: "1"
   bc_memory:
