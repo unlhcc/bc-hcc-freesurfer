@@ -30,6 +30,7 @@ module purge
 cd "${HOME}"
 
 # Load the required environment
+export TCL_LIBRARY="/util/opt/freesurfer/<%= context.freesurfer_version %>/lib/tktools/tcl8.4"
 export FREESURFER_HOME="/util/opt/<%= context.freesurfer_version %>"
 source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
